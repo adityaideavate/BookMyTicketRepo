@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01b409bd5d704fb191b08294f7f2053b" Name="Diagram1">
+        <EntityTypeShape EntityType="AdityaModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.AspNetRole" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.AspNetUser" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Booking" Width="1.5" PointX="7.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.City" Width="1.5" PointX="5.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Customer" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Genre" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Language" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Movie" Width="1.5" PointX="10" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Payment" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Screen" Width="1.5" PointX="10" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Show" Width="1.5" PointX="12.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.sysdiagram" Width="1.5" PointX="9.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdityaModel.Theatre" Width="1.5" PointX="7.75" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="AdityaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Customer_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Theatre_City" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Movie_Genre" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Movie_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Show_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Screen_Theatre" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.FK_Show_Screen" ManuallyRouted="false" />
+        <AssociationConnector Association="AdityaModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

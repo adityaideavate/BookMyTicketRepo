@@ -1,0 +1,141 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<BookMyTicket.Movie>
+
+@{
+    ViewBag.Title = "Test2";
+}
+
+
+@Html.ActionLink("Now Showing", "Index", "Movie", htmlAttributes: new { @class = "btn btn-primary btn-lg", style = "float: right;margin:10px" });
+<h2>All Movies</h2>
+
+
+
+
+
+@*<div class="container">
+        <div class="input-group">
+            <input id="searchmovieid" type="text" class="form-control" placeholder="Search for..." style="float:right" name="search">
+            <span class="input-group-btn">
+                <button class="btn btn-search" type="button" id="searchbtnId"><i class="fa fa-search fa-fw"></i> Search</button>
+            </span>
+        </div>
+    </div>*@
+
+
+
+@using (Html.BeginForm("getSingleMovie", "Movie"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="container">
+        <div class="input-group">
+            <input id="searchmovieid" type="text" class="form-control" placeholder="Search movie here ...." style="float:right" name="search">
+            <span class="input-group-btn">
+
+                <button class="btn btn-search" type="submit" id="searchbtnId"><i class="fa fa-search fa-fw"></i> Search</button>
+            </span>
+        </div>
+    </div>
+}
+
+
+
+
+
+@if (ViewBag.message != null)
+{
+    <div class="row row-MyCard">
+
+        @{
+            var modelcount = Model.Count();
+
+            if (modelcount > 1)
+            {
+                <h4>@ViewBag.message</h4>
+            }
+        }
+
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4 col-sm-4-MyCard ">
+                <div class="card card-MyCard">
+                    <img class="card-img-top card-img-top-MyCard" src="@Html.DisplayFor(modelItem => item.MoviePic)" alt="Card image cap">
+                    <div class="card-body card-body-MyCard">
+                        <center>
+                            <h4 class="card-title card-title-MyCard">@Html.DisplayFor(modelItem => item.MovieName)</h4>
+                            <p class="card-text card-text-MyCard">@Html.DisplayFor(modelItem => item.Description)</p>
+                            @*<a href="#" class="btn btn-primary" @Html.DisplayFor(modelItem => item.Description)  >Go somewhere</a>*@
+                            @Html.ActionLink("Details", "MovieDetails", "Movie", new { movieid = item.MovieId }, htmlAttributes: new { @class = "btn btn-primary" })
+                        </center>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+            }
+            else
+            {
+
+                <div class="row row-MyCard" style="border: 1px solid black; padding: 10px ">
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-sm-4 col-sm-4-MyCard ">
+                            <div class="card card-MyCard">
+                                <img class="card-img-top card-img-top-MyCard" src="@Html.DisplayFor(modelItem => item.MoviePic)" alt="Card image cap">
+                                <div class="card-body card-body-MyCard">
+                                    <center>
+                                        <h4 class="card-title card-title-MyCard">@Html.DisplayFor(modelItem => item.MovieName)</h4>
+                                        <p class="card-text card-text-MyCard">@Html.DisplayFor(modelItem => item.Description)</p>
+                                        @Html.ActionLink("Details", "MovieDetails", "Movie", new { movieid = item.MovieId }, htmlAttributes: new { @class = "btn btn-primary" })
+
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            }
+
+@Html.PagedListPager(Model, page => Url.Action("Test2", new { page }))
+
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            $(function () {
+                $.ajax({
+
+                    type: "GET",
+                    url: '@Url.Action("getMovies", "Movie")',
+                    ContentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+
+                        $("#searchmovieid").autocomplete({
+                            source: response
+                        });
+                    },
+                    error: function () { alert("Some error occured"); }
+                });
+            });
+        })
+    </script>
+}
+
+
+

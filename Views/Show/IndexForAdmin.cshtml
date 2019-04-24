@@ -1,0 +1,181 @@
+﻿
+@model IEnumerable<BookMyTicket.Show>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New Show", "ScreenList", "Show", htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+</p>
+<table class="table @*table-striped*@ table-bordered" id="showtableid" style="width:100%">
+
+    <thead>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Screen.Theatre.TheatreName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Screen.Theatre.City.CityName)
+            </th>
+
+            <th>Edit or Delete</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Movie.MovieName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Screen.Theatre.TheatreName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Screen.Theatre.City.CityName)
+                </td>
+
+               
+                <td>
+                    @Html.ActionLink("Edit", "EditShowForm", new { id = item.ShowId }, htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+
+                    @*<button type="button" class="btn btn-primary" id="deleteshowId" value="@item.ShowId">Delete</button>*@
+
+
+                    |
+
+                    @*@Html.ActionLink("Delete", "DeleteShow", new { id = item.ShowId }, new { htmlAttributes = new { id ="deleteshowId"} } )*@
+
+                    <button type="button" class="btn btn-primary btn-sm" id="deleteshowId" value="@item.ShowId">Delete</button>
+
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@{ 
+
+    if (@TempData["CheckMailMessage"] != null)
+    {
+<h1 hidden id="TempDataID">@TempData["CheckMailMessage"]</h1>
+        }
+
+    }
+
+    @section scripts
+    {
+        @Scripts.Render("~/Scripts/bootbox.js")
+@Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+@Scripts.Render("~/Scripts/dataTables.bootstrap.min.js")
+
+
+
+<script >
+
+    $(document).ready(function () {
+        
+        var var1 = $("#TempDataID").text();
+       
+        if (var1.length > 0)
+        {
+            alert(var1);
+        }
+        
+
+
+    
+        
+        $('#showtableid').DataTable();
+
+        $("#deleteshowId ").click(function () {
+           
+    
+            var value = $(this).val();
+
+            bootbox.confirm({
+                title: "Delete Show",
+                message: "Do you want to delete this Show? This cannot be undone.",
+                buttons: {
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> Cancel'
+                    },
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> Confirm'
+                    }
+                },
+                callback: function (result) {  
+                    
+                    if (result) {
+
+                       $.ajax({
+                               type: "GET",
+                               url: '@Url.Action("DeleteShow", "Show")',         
+
+                                data: {
+                                        id: value
+                                       },              
+                               success: function (response) {                         
+                                                  
+                                                             window.location = "http://localhost:50301/Show ";
+                                
+                                                             //       table.row(button.parents("tr")).remove().draw();                         
+                                                     
+                                                             },
+                                error: function () { bootbox.alert("Some error occured"); }
+                              });
+
+
+                              }
+                  
+                          }
+                   });
+            })
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+    </script>
+
+
+
+}

@@ -1,0 +1,136 @@
+﻿@model BookMyTicket.ViewModel.BookingViewModel
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+
+
+
+@using (Html.BeginForm("BookingConfirm","Show",FormMethod.Post, new { id= "BookingConfirmFormId" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h2>Choose Payment Mode</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @*<h2>
+            @Html.DisplayFor(temp=>temp.show.Movie.MovieName)
+            @Html.DisplayFor(temp => temp.show.Screen.Theatre.TheatreName)
+            @Html.DisplayFor(temp => temp.show.Screen.Theatre.City.CityName)
+
+        </h2>*@
+
+        @*<p>---------------------------------------------</p>*@
+   
+        <div class="order-summarywrap">
+            <div style="background-color: #fef6bf;padding:20px; border-radius:15px;width:500px;font-size:23px;margin-bottom:20px;margin:20px">
+
+                @*<p style="background-color: #D1D1D1">test p</p>*@
+
+                <span>Movie Name:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Movie.MovieName)</span><br>
+                
+                <span>Time:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Time)</span><br>
+                <span>Theatre Name:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Screen.Theatre.TheatreName)</span><br>
+                <span>@Html.DisplayFor(temp => temp.show.Screen.Theatre.City.CityName)</span>
+
+            </div>
+        </div>
+
+
+        @*<p>---------------------------------------------</p>*@
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.booking.DateOfBooking, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.booking.DateOfBooking)
+                         
+                @Html.ValidationMessageFor(model => model.booking.DateOfBooking, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.booking.NoOfSeats, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.booking.NoOfSeats)
+            
+                @Html.ValidationMessageFor(model => model.booking.NoOfSeats, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.booking.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.booking.Email)
+             
+                @Html.ValidationMessageFor(model => model.booking.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.booking.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.booking.TotalAmount)
+            
+                @Html.ValidationMessageFor(model => model.booking.TotalAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.booking.PaymentId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model=>model.booking.PaymentId,new SelectList(Model.paymentlist, "PaymentId", "PaymentName"), new { htmlAttributes = new { @class = "form-control" } })
+              
+                @Html.ValidationMessageFor(model => model.booking.PaymentId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @Html.HiddenFor(model=>model.booking.ShowId)
+
+        @Html.HiddenFor(model => model.booking.DateOfBooking)
+
+        @Html.HiddenFor(model => model.booking.NoOfSeats)
+
+        @Html.HiddenFor(model => model.booking.Email)
+
+        @Html.HiddenFor(model => model.booking.TotalAmount)
+
+        @Html.HiddenFor(model => model.booking.PaymentId)
+        
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Book" class="btn btn-default" id="BookingConfirmbtnSubmit"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+            $('#BookingConfirmFormId').submit(function () {
+                $("#BookingConfirmbtnSubmit")
+                  .val("Please Wait...")
+                  .attr('disabled', 'disabled'); 
+                return true;
+            });
+
+
+
+        });
+
+    </script>
+}

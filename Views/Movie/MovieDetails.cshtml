@@ -1,0 +1,154 @@
+﻿@model BookMyTicket.Movie
+
+@{
+    ViewBag.Title = "MovieDetails";
+}
+
+@*<h2>MovieDetails</h2>*@
+
+  @*<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovieName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateRelease)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateRelease)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>   
+        
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoviePic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoviePic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieWallpaper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovieWallpaper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre.GenreName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre.GenreName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Language.LanguageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Language.LanguageName)
+        </dd>
+
+    </dl>
+</div>*@
+
+
+<div   style="height:350px;border: 1px solid">
+    <img src=@Html.DisplayFor(model => model.MovieWallpaper) style="height: 100%; width: 100%">
+</div>
+
+<div style=" height: 350px" >
+<table class="table" style="background-color: #E6FFD1/*#e6ffee*/;width:75% ;height:100%; float: right">
+    @*<tdead>*@
+
+        <tr style="font-size:25px">
+            <td scope="col" width="30%">Movie Name</td>
+            <td scope="col">@Html.DisplayFor(model => model.MovieName)</td>            
+        </tr>
+
+        <tr style="font-size:25px">
+            <td scope="col" width="30%">Release Date</td>
+            <td scope="col">@Html.DisplayFor(model => model.DateRelease)</td>
+        </tr>
+             
+
+        <tr style="font-size:25px">
+            <td scope="col" width="30%">Genre</td>
+            <td scope="col">@Html.DisplayFor(model => model.Genre.GenreName)</td>
+        </tr>
+
+
+        <tr style="font-size:25px">
+            <td scope="col" width="30%">Language</td>
+            <td scope="col">@Html.DisplayFor(model => model.Language.LanguageName)</td>
+        </tr>
+
+        <tr style="font-size:25px">
+            <td scope="col" width="30%">Description</td>
+            <td scope="col">@Html.DisplayFor(model => model.Description)</td>
+        </tr>
+
+    @*</thead>*@
+ 
+</table>
+
+@*<div style="width:100%;height:100%" id="finddivId" >
+
+    <img src=@Html.DisplayFor(model => model.MoviePic) style="height: 100%; width: 100%">
+
+ 
+</div>*@
+
+
+    <div class="cards" style="height: 100%; width: 100%">
+        <div class="card-img" style="width:25%;height:100%" >
+            <img  src=@Html.DisplayFor(model => model.MoviePic) style="height: 100%; width: 100%; padding: 8px; border-radius: 35px" >
+            @*<p>test paragraph</p>*@
+                         
+        </div>
+  
+    </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+<p>
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>

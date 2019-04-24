@@ -1,0 +1,94 @@
+﻿
+@model IEnumerable<BookMyTicket.Screen>
+
+@{
+    ViewBag.Title = "ScreenList";
+}
+
+<h2>Select Screen</h2>
+
+@*@Html.ActionLink("Add New Screen", "NewScreen","Show", htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })*@
+
+@Html.ActionLink("Add New Screen", "SelectCity", "Show", htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+
+<table class="table @*table-striped*@ table-bordered" id="screentableid" style="width:100%" >
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScreenId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScreenCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Theatre.TheatreName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Theatre.TheatreAddress)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Theatre.City)
+            </th>
+            <th>create new show</th>
+        </tr>
+
+        </thead>
+
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScreenId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScreenCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Theatre.TheatreName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Theatre.TheatreAddress)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Theatre.City.CityName)
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Create Show", "ShowForm", new { id = item.ScreenId }, htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+                </td>
+
+
+            </tr>
+        }
+
+        </tbody>
+
+</table>
+
+
+@section scripts
+{
+    
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/dataTables.bootstrap.min.js")
+
+<script>
+
+    $(document).ready(function () {
+    
+        $('#screentableid').DataTable();
+    
+    })
+
+    </script >
+
+}

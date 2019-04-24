@@ -1,0 +1,104 @@
+﻿@model  IEnumerable<BookMyTicket.Movie> 
+
+@*@{
+    ViewBag.Title = "Home Page";
+}*@
+
+@*<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>*@
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" >
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+       
+       
+            @*@foreach (var item in Model)
+            {
+                <div class="item active" style="height: 450px">
+                    <img src="@Html.DisplayFor(model => item.MoviePic)" alt="Los Angeles" style="height:100%;width:100%">
+                </div>
+            }*@
+
+
+
+
+        @{
+            var value = 1;
+        }
+
+        @foreach (var item in Model)
+            {
+                if (value == 1)
+                {
+                <div class="item active" style="height: 450px">
+                    <img src="@Html.DisplayFor(model => item.MovieWallpaper)" alt="Los Angeles" style="height:100%;width:100%">
+                </div>
+                value=2;
+                }
+                else
+                {
+                <div class="item" style="height: 450px">
+                    <img src="@Html.DisplayFor(model => item.MovieWallpaper)" alt="Los Angeles" style="height:100%;width:100%">
+                </div>
+            }
+
+
+        }
+
+
+
+
+
+                
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Movies won't let you down!</h2>
+        <p>
+            A well made Hindi movie has the power to change your perspective towards life and different subjects circling it. 
+            If you miss your home or want to go to a holiday destination, or chase some high octane action scenes, you always seek good movies. No matter what the situation comes, you go to your favourite Hindi movie and seek a second opinion. If watching latest Hindi films make you feel closer to home or to your dear ones, then this is the right place for you to be at.
+        </p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
+    </div>
+    <div class="col-md-4">
+        <h2>Never miss out on the latest Hindi movies!</h2>
+        <p>It’s a fascinating thing to see how the number of new Hindi movies releasing every year is increasing exponentially. Bollywood and Hollywood movies are rising to fame day by day and don’t be surprised if you see the latest Hindi movies in the theatres near you in INDORE. Also, if you want to check out the latest showtimes, movie trailers or gossip around Hindi movies releasing in 2019, you have just arrived at the right place folks! This Hindi movie listing reference is your one end solution for all the latest updates about new Hindi movies running in theatres now in INDORE which definitely won’t let you down!</p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>*@
+    </div>
+    <div class="col-md-4">
+        <h2>The Weekend Movie Treat is Here</h2>
+        <p>Catch the list of all the Hindi movies to watch this weekend and get rid of all the monotonous plans you have with your dear ones in INDORE. At BookMyShow, we provide a list of latest Hindi movies with ratings, reviews from all the reputed sources and latest trailers of Hindi movies. Find the convenient showtimes in theatres near you and everything about latest Hindi movies to watch at BookMyShow. Whether you’re a movie buff or not, Hindi movies lined up in 2019 - 2020 are surely going to give you a great time and get you hooked on to something extraordinary.</p>
+        @*<p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>*@
+    </div>
+</div>

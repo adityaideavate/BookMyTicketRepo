@@ -1,0 +1,282 @@
+﻿@model  BookMyTicket.ViewModel.BookingViewModel
+
+@{
+    ViewBag.Title = "CreateBookingForm";
+}
+
+@*<h2>CreateBookingForm</h2>*@
+
+
+@using (Html.BeginForm("BookingCalculation", "Show"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="margin-bottom:0px">
+
+        <h2>Booking Summary</h2>
+
+
+        @if (ViewBag.amount == null)
+        {
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<h2>@Html.DisplayFor(model=>model.show.ShowId)</h2>*@
+
+
+            <div class="order-summarywrap">
+                <div style="background-color: #fef6bf;padding:20px; border-radius:15px;width:500px;font-size:23px;margin-bottom:20px;margin:20px">
+
+                    @*<p style="background-color: #D1D1D1">test p</p>*@
+
+                    <span>Movie Name:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Movie.MovieName)</span><br>
+                    <span>Rate:</span>&nbsp&nbsp<span>Rs.@Html.DisplayFor(model => model.show.Rate)</span><br>
+                    <span>Time:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Time)</span><br>
+                    <span>Theatre Name:</span>&nbsp&nbsp<span>@Html.DisplayFor(model => model.show.Screen.Theatre.TheatreName)</span><br>
+
+                </div>
+            </div>
+
+
+
+
+
+            @*<h2>
+                    @Html.DisplayFor(model => model.show.Movie.MovieName)&nbsp;&nbsp;
+                    @Html.DisplayFor(model => model.show.Rate)Rs&nbsp;&nbsp;
+                    @Html.DisplayFor(model => model.show.Time)&nbsp;&nbsp;
+                    @Html.DisplayFor(model => model.show.Screen.Theatre.TheatreName)
+                </h2>*@
+
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.booking.DateOfBooking, htmlAttributes: new { @class = "control-label col-md-2", id = "datepicker1" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.booking.DateOfBooking, new { htmlAttributes = new { @class = "form-control", id = "datepicker" } })
+                    @Html.ValidationMessageFor(model => model.booking.DateOfBooking, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.booking.NoOfSeats, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="width: 330px">
+
+                    @Html.EditorFor(model => model.booking.NoOfSeats, new { htmlAttributes = new { @class = "form-control", id = "NoOfSeatsId" } })
+                    @Html.ValidationMessageFor(model => model.booking.NoOfSeats, "", new { @class = "text-danger" })
+
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-10" style="height:20px; width: 495px">
+
+                        <p id="ajaxresponseid" style="float:left;margin-right:160px;color: black"></p>
+
+                        @*data-valmsg-for="booking.NoOfSeats" data-valmsg-replace="true"*@
+
+
+                    </div>
+                </div>
+
+
+                @*<div class="col-md-2" id="availablityId" style="background-color: red; float:right; height: inherit "></div>*@
+            </div>
+
+
+            @*<div class="form-group" >
+                      <div class="col-md-10" style="height:20px; width: 495px">
+
+                              <p  id="ajaxresponseid"  style="float:right;margin-right:160px;color: red"></p>
+
+                    </div>
+                </div>*@
+
+
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.booking.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.booking.Email, new { htmlAttributes = new { @class = "form-control",id="idEmail", placeholder = "enter registerd email address" } })
+                        @Html.ValidationMessageFor(model => model.booking.Email,"", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+
+            @Html.HiddenFor(model => model.booking.ShowId)
+            @Html.HiddenFor(model => model.show.Rate)
+
+            @Html.HiddenFor(temp => temp.show.ShowId, new { htmlAttributes = new { id = "hiddenshowid" } })
+
+            @Html.HiddenFor(temp => temp.screen.ScreenId)
+            @Html.HiddenFor(temp => temp.screen.ScreenCapacity)
+
+
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Proceed" class="btn btn-default" id="bookingbtnId" />
+                </div>
+            </div>
+
+
+        }
+
+    </div>
+
+}
+
+
+
+@if (ViewBag.amount != null)
+{
+    using (Html.BeginForm("Payment", "Show"))
+    {
+        Html.AntiForgeryToken();
+        <div class="form-horizontal" style="margin-top:0px">
+            <div>
+                <h2 style="margin:10px">Total Amount @ViewBag.amount</h2>
+
+                @Html.HiddenFor(model => model.booking.DateOfBooking)
+                @Html.HiddenFor(model => model.booking.Email)
+                @Html.HiddenFor(model => model.booking.NoOfSeats)
+                @Html.HiddenFor(model => model.booking.TotalAmount)
+                @Html.HiddenFor(model => model.booking.ShowId)
+                @Html.HiddenFor(temp => temp.screen.ScreenId)
+                @Html.HiddenFor(temp => temp.screen.ScreenCapacity)
+
+
+
+                <button type="submit" class="btn btn-primary" style="margin:10px">Proceed to Payment</button>
+
+                @*@Html.ActionLink("Click to Proceed", "Payment", "Show",new { bvm=Model.booking}, htmlAttributes: new { @class = "btn btn-primary", @type = "submit" })*@
+            </div>
+        </div>
+    }
+}
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootbox.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#datepicker").datepicker({
+                minDate: 0
+            });
+            $("#datepicker").val("");
+            $("#NoOfSeatsId").val("");
+            $("#idEmail").val("");
+
+
+
+
+            $("#datepicker").change(function () {
+
+
+                var showIdvalue = @Html.DisplayFor(model => model.show.ShowId).ToString();
+                if(/*$("#NoOfSeatsId").val()!="" && */$("#datepicker").val()!="" &&  showIdvalue!="") {
+
+                    $.ajax({
+
+                        type: "GET",
+                        url: '@Url.Action("BookingAvailablity","Show")',
+                        ContentType: "application/json; charset=utf-8",
+
+                        data: {
+                            DateOfBooking:  $("#datepicker").val(),
+                            ShowId:showIdvalue//,
+                            //            NoOfSeats:  $("#NoOfSeatsId").val()
+                        },
+
+                        dataType:"json",
+
+                        success: function (response) {
+
+                            response1= response;
+
+                            if(response ==1)
+                            {
+                                $("#ajaxresponseid").html(response+" Seat left");
+                            }
+                            else{
+
+                                if(response ==0)
+                                {
+                                    $("#ajaxresponseid").html(response+" Seat left &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Select another Date");
+                                }
+                                else{
+                                    $("#ajaxresponseid").html(response+" Seats are left");
+                                }
+
+
+                            }
+
+
+
+
+
+                            //if($("#NoOfSeatsId").val()>response)                                                    //here
+                            //{
+                            //    alert("No of seats cannot be greater than "+response+"  seats");
+                            //}
+
+                            if(response == 0)
+                            {
+                                // $("#bookingbtnId").hide();
+                                $("#bookingbtnId").attr("disabled", "disabled");
+                                $("#NoOfSeatsId").attr("disabled", "disabled");
+                            }
+                            else
+                            {
+
+
+                                // $("#bookingbtnId").hide();
+                                $("#bookingbtnId").attr("disabled",false);
+
+                                $("#NoOfSeatsId").attr("disabled",false);
+
+                            }
+
+
+                            $("#NoOfSeatsId").keyup(function(){
+
+
+
+
+                                if($("#NoOfSeatsId").val()>response1)
+                                {
+                                    alert("No of seats cannot be greater than "+response1+"  seats");
+                                }
+
+                            })
+
+                        },
+
+                        error: function () { alert("Some error occured"); }
+                    });
+
+
+
+
+
+                }
+            });
+
+        });
+    </script>
+}

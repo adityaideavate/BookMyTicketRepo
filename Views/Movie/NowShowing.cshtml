@@ -1,0 +1,52 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<BookMyTicket.Movie>
+
+
+@{
+    ViewBag.Title = "NowShowing";
+}
+
+@*<button type="button" class="btn btn-primary btn-lg" style="float:right;margin:10px">All Movies</button>*@
+@Html.ActionLink("All Movies", "Test2","Movie",htmlAttributes: new { @class = "btn btn-primary btn-lg",style= "float: right;margin:10px" });
+<h2>Now Showing</h2>
+
+
+          
+
+    <div class="row row-MyCard">
+
+        @foreach (var item in Model)
+        {            
+
+            <div class="col-sm-4 col-sm-4-MyCard ">
+                <div class="card card-MyCard">
+                    <img class="card-img-top card-img-top-MyCard" src="@Html.DisplayFor(modelItem => item.MoviePic)" alt="Card image cap">
+                    <div class="card-body card-body-MyCard">
+                        <center>
+                            <h4 class="card-title card-title-MyCard">@Html.DisplayFor(modelItem => item.MovieName)</h4>
+                            <p class="card-text card-text-MyCard">@Html.DisplayFor(modelItem => item.Description)</p>
+                            @Html.ActionLink("Book Now", "cardButtonPress", "Movie", new { movieid = item.MovieId }, htmlAttributes: new { @class = "btn btn-primary" })
+
+                        </center>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    </div>
+          
+
+@Html.PagedListPager(Model, page => Url.Action("NowShowing", new { page }))
+
+
+
+
+
+
+
+
+

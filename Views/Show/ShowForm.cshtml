@@ -1,0 +1,175 @@
+﻿
+@model BookMyTicket.ViewModel.ShowViewModel
+
+@{
+    ViewBag.Title = "CreateNewShow";
+}
+
+
+
+
+@using (Html.BeginForm("CreateNewShow", "Show", FormMethod.Post, new { id = "CreateNewShowId" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>Create New Show</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div style="background-color: #fef6bf;padding:20px; border-radius:15px;width:500px;font-size:23px;margin-bottom:20px;margin:20px">
+
+
+
+            <span>ScreenId:</span>&nbsp;&nbsp;<span>@Html.DisplayFor(temp => temp.screen.ScreenId)</span><br>
+            <span>Theatre Name:</span>&nbsp;&nbsp;<span>@Html.DisplayFor(temp => temp.screen.Theatre.TheatreName)</span><br>
+            <span>City:</span>&nbsp;&nbsp;<span>@Html.DisplayFor(temp => temp.screen.Theatre.City.CityName)</span><br>
+
+        </div>
+
+
+        
+         @*<h1> ScreenId 
+            @Html.DisplayFor(temp => temp.screen.ScreenId)&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.DisplayFor(temp => temp.screen.Theatre.TheatreName) &nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.DisplayFor(temp => temp.screen.Theatre.City.CityName)</h1>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.show.MovieId, "MovieId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.show.MovieId, new SelectList(Model.movieList, "MovieId", "MovieName"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model =>model.show.MovieId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+                        
+
+
+
+       @*<div class="form-group">
+        @Html.LabelFor(model => model.show.ScreenId, "ScreenId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+
+            @Html.DisplayFor(model => model.show.ScreenId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.show.ScreenId, "", new { @class = "text-danger" })
+           </div>
+    </div>*@
+    
+    
+         
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.show.Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.show.Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.show.Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.show.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.show.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.show.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.show.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+                @Html.EditorFor(model => model.show.Time, new { htmlAttributes = new { @class = "form-control "/*, id = "datetimepicker3"*/  } })
+                @Html.ValidationMessageFor(model => model.show.Time, "", new { @class = "text-danger" })
+             
+            </div>
+        </div>
+
+
+        @Html.HiddenFor(temp=>temp.show.ScreenId)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="btnid" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+
+
+<link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
+
+<script type="text/javascript">
+
+
+    
+
+
+    $(document).ready(function () {
+               
+        //$('#CreateNewShowId').submit(function () {
+        //    $("#btnid")
+        //      .val("Please Wait...")
+        //      .attr('disabled', 'disabled'); 5
+
+        //    return true;
+        //});
+
+        $(function () {
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+            });
+
+
+        });
+     
+
+        @*$("#theatreDropdownId ").change(function () {
+
+         
+
+            $.ajax({
+                type:"GET",
+                url: '@Url.Action("GetCity", "Show")',
+                ContentType: "application/json: charset=utf-8",
+                data: {
+                    Theatreid: $("#theatreDropdownId").val()
+                },
+
+                success: function (result) {
+                    $("#showCityP").html(result);
+                },
+                error: function () {
+                    alert("some error occured");
+                }
+            });
+
+
+        })*@
+
+        })            
+</script>
+
+}
+
+
+
+
